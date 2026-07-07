@@ -1,0 +1,7 @@
+[System.Reflection.Assembly]::LoadWithPartialName("System.EnterpriseServices") | Out-Null
+$publish = New-Object System.EnterpriseServices.Internal.Publish
+
+Get-ChildItem "C:\Users\spespsadm\Desktop\dlls\*.dll" | Where-Object { $_.Name -notlike "*.resources.dll" } | ForEach-Object {
+    $publish.GacInstall($_.FullName)
+    Write-Host "Installed: $($_.Name)"
+}
